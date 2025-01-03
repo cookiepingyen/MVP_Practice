@@ -13,6 +13,7 @@ using System.Threading.Tasks;
 using System.Windows.Forms;
 using static System.Windows.Forms.VisualStyles.VisualStyleElement;
 using System.Windows.Forms.DataVisualization.Charting;
+using IOCServiceCollection;
 
 namespace MVP架構練習
 {
@@ -22,12 +23,13 @@ namespace MVP架構練習
         IOverTimePresenter overTimePresenter;
         IOverGraphPresenter graphPresenter;
 
-        public Form1()
+        public Form1(PresenterFactory presenterFactory)
         {
             InitializeComponent();
-            empSearchPresenter = new EmpSearchPresenter(this);
-            overTimePresenter = new OverTimePresenter(this);
-            graphPresenter = new OverGraphPresenter(this);
+            empSearchPresenter = presenterFactory.Create<IEmpSearchPresenter, IEmpSearchView>(this);
+            overTimePresenter = presenterFactory.Create<IOverTimePresenter, IOverTimeTable>(this);
+            graphPresenter = presenterFactory.Create<IOverGraphPresenter, IOverTimeGraph>(this);
+
             empSearchPresenter.GetEmpList();
         }
 

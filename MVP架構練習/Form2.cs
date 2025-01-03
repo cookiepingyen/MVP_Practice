@@ -17,11 +17,12 @@ namespace MVP架構練習
     {
         IEmpSearchPresenter empSearchPresenter;
         IOverTimePresenter overTimePresenter;
-        public Form2()
+        public Form2(PresenterFactoryTmp presenterFactory)
         {
             InitializeComponent();
-            empSearchPresenter = new EmpSearchPresenter(this);
-            overTimePresenter = new OverTimePresenter(this);
+            empSearchPresenter = presenterFactory.Create<IEmpSearchPresenter, IEmpSearchView>(this);
+            overTimePresenter = presenterFactory.Create<IOverTimePresenter, IOverTimeTable>(this);
+
             empSearchPresenter.GetEmpList();
         }
 
