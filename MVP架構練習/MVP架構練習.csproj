@@ -76,6 +76,7 @@
     </Compile>
     <Compile Include="Models\ViewModel\EmpOverTimeGraph.cs" />
     <Compile Include="Models\ViewModel\EmpOverTimeTable.cs" />
+    <Compile Include="Presentser\OverTimeWeightPresenter.cs" />
     <Compile Include="PresenterFactoryTmp.cs" />
     <Compile Include="Utility\Mapper.cs" />
     <Compile Include="Form1.cs">

@@ -10,14 +10,14 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace MVP架構練習.Presentser
+namespace MVP架構練習
 {
     [Transient]
-    internal class OverTimePresenter : IOverTimePresenter
+    internal class OverTimeWeightPresenter : IOverTimePresenter
     {
         IOverTimeTable table;
         OverTimeRepository repository;
-        public OverTimePresenter(IOverTimeTable table)
+        public OverTimeWeightPresenter(IOverTimeTable table)
         {
             this.table = table;
             this.repository = new OverTimeRepository();
@@ -27,6 +27,12 @@ namespace MVP架構練習.Presentser
             List<OverTime> overTimeList = repository.GetOverTimeByID(empID);
 
             List<EmpOverTimeTable> empOverTimeTables = Mapper.Map<OverTime, EmpOverTimeTable>(overTimeList).ToList();
+
+            foreach (EmpOverTimeTable overTimeItem in empOverTimeTables)
+            {
+                overTimeItem.overHours *= 2;
+            }
+
             this.table.OverTimeTableResponse(empOverTimeTables);
         }
     }

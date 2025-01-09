@@ -14,9 +14,11 @@ using System.Windows.Forms;
 using static System.Windows.Forms.VisualStyles.VisualStyleElement;
 using System.Windows.Forms.DataVisualization.Charting;
 using IOCServiceCollection;
+using IOCServiceCollection.Attributes;
 
 namespace MVP架構練習
 {
+    [Singleton]
     public partial class Form1 : Form, IOverTimeTable, IEmpSearchView, IOverTimeGraph
     {
         IEmpSearchPresenter empSearchPresenter;

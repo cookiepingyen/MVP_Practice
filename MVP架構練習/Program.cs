@@ -4,8 +4,10 @@ using MVP架構練習.Presentser;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Reflection;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using System.Xml.Linq;
 
 namespace MVP架構練習
 {
@@ -23,11 +25,9 @@ namespace MVP架構練習
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
 
+            Assembly assembly = Assembly.GetExecutingAssembly();
             IOCServiceCollection.ServiceCollection collection = new IOCServiceCollection.ServiceCollection();
-            collection.AddTransient<IEmpSearchPresenter, EmpSearchPresenter>()
-                      .AddTransient<IOverTimePresenter, OverTimePresenter>()
-                      .AddTransient<IOverGraphPresenter, OverGraphPresenter>()
-                      .AddSingleton<Form, Form1>();
+            collection.AutoRegister(assembly);
 
             provider = collection.BuildServiceProvider();
 

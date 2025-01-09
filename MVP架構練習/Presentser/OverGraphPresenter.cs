@@ -1,4 +1,5 @@
-﻿using MVP架構練習.Contracts;
+﻿using IOCServiceCollection.Attributes;
+using MVP架構練習.Contracts;
 using MVP架構練習.Models;
 using MVP架構練習.Models.Repositories;
 using MVP架構練習.Models.ViewModel;
@@ -11,6 +12,7 @@ using System.Threading.Tasks;
 
 namespace MVP架構練習.Presentser
 {
+    [Transient]
     internal class OverGraphPresenter : IOverGraphPresenter
     {
         IOverTimeGraph graph;
