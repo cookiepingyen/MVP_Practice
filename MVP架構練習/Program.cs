@@ -29,6 +29,13 @@ namespace MVP架構練習
             IOCServiceCollection.ServiceCollection collection = new IOCServiceCollection.ServiceCollection();
             collection.AutoRegister(assembly);
 
+            collection.AddTransient<IOverTimePresenter, OverTimePresenter>();
+            collection.AddTransient<IOverTimePresenter, OverTimeWeightPresenter>();
+            collection.AddTransient<IEmpSearchPresenter, EmpSearchPresenter>();
+
+            collection.AddSingleton<Form, Form2>();
+
+
             provider = collection.BuildServiceProvider();
 
             Form form = provider.GetService<Form>();

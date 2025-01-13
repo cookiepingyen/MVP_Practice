@@ -1,4 +1,6 @@
-﻿using MVP架構練習.Contracts;
+﻿using IOCServiceCollection;
+using Microsoft.Extensions.DependencyInjection;
+using MVP架構練習.Contracts;
 using MVP架構練習.Models.ViewModel;
 using MVP架構練習.Presentser;
 using System;
@@ -17,11 +19,16 @@ namespace MVP架構練習
     {
         IEmpSearchPresenter empSearchPresenter;
         IOverTimePresenter overTimePresenter;
-        public Form2(PresenterFactoryTmp presenterFactory)
+        public Form2(PresenterFactory presenterFactory)
         {
             InitializeComponent();
             empSearchPresenter = presenterFactory.Create<IEmpSearchPresenter, IEmpSearchView>(this);
-            overTimePresenter = presenterFactory.Create<IOverTimePresenter, IOverTimeTable>(this);
+
+            // 1. 固定只有一個 view 對一個 presenter 的情況
+            //overTimePresenter = presenterFactory.Create<IOverTimePresenter, IOverTimeTable>(this);
+
+            // 2. 一個 view 會對上多個 presenter 的情況
+            overTimePresenter = presenterFactory.Create<IOverTimePresenter, IOverTimeTable>(this, (x) => new OverTimeWeightPresenter(this));
 
             empSearchPresenter.GetEmpList();
         }
